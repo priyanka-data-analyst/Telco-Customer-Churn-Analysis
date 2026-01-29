@@ -78,7 +78,7 @@ Built a 6-point interactive dashboard featuring:
 
 Clone the repository:
 
-👉 git clone [https://github.com/yourusername/telco-churn-analysis.git](https://github.com/yourusername/telco-churn-analysis.git)
+👉 git clone (https://github.com/priyanka-data-analyst/Telco-Customer-Churn-Analysis)]
 
 ✔️ Install dependencies:
 pip install pandas sqlalchemy pymysql
