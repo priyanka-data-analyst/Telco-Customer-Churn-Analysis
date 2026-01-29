@@ -96,7 +96,6 @@ python upload_to_sql.py
 
 👤 Author
 Priyanka Deshpande Data Analyst | Python | SQL | Power BI 
-[Link to Portfolio/LinkedIn]
 
 
 
