@@ -1,112 +1,53 @@
-📉 End-to-End Telco Customer Churn Analysis
+📉 Telco Customer Churn Analysis
 
 🚀 Project Overview
 
-This project is an end-to-end data analysis pipeline designed to identify the root causes of customer churn in a telecommunications company. 
+👉 This project analyzes a dataset of 7,043 telecom customers to predict churn behavior and identify retention strategies. 
+I utilized a "Modern Data Stack" approach:
+1. Python: For initial data cleaning and exploratory data analysis (EDA).
+2. Snowflake (SQL): For cloud-based data warehousing and identifying high-value churners.
+3. Power BI: For building an interactive dashboard to visualize contract risks.
 
-Using a dataset of 7,000+ customers, I built a solution that:
-1. Cleans and processes raw data using Python (Pandas).
-2. Warehouses the data in a relational database (MySQL).
-3. Visualizes key business metrics via an interactive dashboard (Power BI).
+📊 Key Insights
+⁕ High Risk Segment: Customers on Month-to-Month contracts have a churn rate of 42.7%, compared to just 2.8% for Two-Year contracts.
+⁕ Payment Method: Electronic Check users are significantly more likely to leave than those using automatic payments.
+⁕ Tenure Impact: The highest churn occurs within the first 6 months. If a customer stays past 12 months, their loyalty increases by 60%.
 
-The goal was to move beyond simple reporting and answer the "Why" behind customer attrition—specifically identifying high-risk segments like Fiber Optic users and new customers.
 
-💐💐💐
+🛠️ Technical Workflow
 
-🛠️ Tech Stack & Architecture
+1. Data Engineering (Python & Snowflake)
+⁕ Python: Handled null values in `TotalCharges` and standardized column names.
+⁕ Snowflake (SQL): Loaded the cleaned CSV into a cloud warehouse (`TELCO_CHURN_DB`). Wrote aggregation queries to validate churn counts before visualization.
 
-👉 ETL & Data Cleaning: Python (Pandas, NumPy)
-👉 Database Management: MySQL 8.0 (Command Line & Workbench)
-👉 Database Connection: SQLAlchemy, PyMySQL
-👉 Visualization & Reporting: Microsoft Power BI
-👉 IDE: PyCharm Community Edition
+SQL Proof of Concept:
 
-🔄 The Pipeline Workflow:
+[DRAG AND DROP YOUR SNOWFLAKE SCREENSHOT HERE]
 
-1. Raw CSV (`WA_Fn-UseC_-Telco-Customer-Churn.csv`) → Ingested by Python.
-2. Data Cleaning → Handled missing values, converted `TotalCharges` to numeric, and removed duplicates.
-3. Database Load → Automating upload to MySQL Server (Port 3307) via SQLAlchemy Engine.
-4. SQL Analysis → Ran queries to validate data integrity and extract initial insights.
-5. Power BI Connection → Direct Query/Import from MySQL Database to build the dashboard.
+<img width="1921" height="922" alt="snowflake_results" src="https://github.com/user-attachments/assets/8845854e-9737-4ccc-930c-30040727d150" />
 
-💐💐💐
+(My SQL query running in the Snowflake Cloud Interface)
 
-📊 Key Business Insights (The "So What?")
-
-Through SQL analysis and Power BI visualization, three critical churn drivers were identified:
-
-👉 The "Fiber Optic" Trap
-⁕ Finding: Customers with Fiber Optic internet have a churn rate approximately 3x higher than DSL users.
-⁕ Business Impact: The "premium" service is actually the primary bleed point.
-⁕ Recommendation: Investigate service reliability and pricing competitiveness for Fiber Optic plans immediately.
-
-👉 The "First Year" Danger Zone
-⁕ Finding: An Area Chart analysis reveals a massive spike in churn during months 0–12. Once a customer survives the first year, retention rates stabilize significantly.
-⁕ Recommendation: Implement a specialized "Onboarding Concierge" program for new sign-ups to survive the first 6 months.
-
-👉 Payment Friction
-⁕ Finding: Customers paying via Electronic Check have significantly higher churn compared to those using Credit Cards or Bank Transfers (Auto-pay).
-⁕ Recommendation: Incentivize users to switch to Auto-pay by offering a small discount (e.g., $5 off for 6 months).
-
-💐💐💐
-
-💻 Technical Steps Executed
-
-Step 1: Python ETL (Extract, Transform, Load)
-Raw data contained blank strings in the `TotalCharges` column, which prevented SQL ingestion.
-⁕ Solution: Used `pd.to_numeric(errors='coerce')` to handle non-numeric data and filled `NaN` values with 0.
-⁕ Database Upload: Implemented `SQLAlchemy` with `PyMySQL` driver to bypass local file permission errors (Error 3948) and connect to a custom MySQL port (3307).
-
-Step 2: SQL Logic
-⁕ Data integrity was verified using aggregation queries before visualization.
-```sql
-⁕ Query to identify the highest churn internet service
-SELECT InternetService, Churn, COUNT(*) as Count
-FROM customers
-GROUP BY InternetService, Churn
-ORDER BY Count DESC;
-
-Step 3: Power BI Dashboarding
-Built a 6-point interactive dashboard featuring:
-✔️ KPI Cards: Total Revenue Lost, Churn Rate.
-✔️ Demographic Slicers: Dynamic filtering by Senior Citizen status and Gender.
-✔️ Visuals: Clustered Bar Chart for Internet Service analysis.
-            ⁕ Area Chart for Tenure vs. Churn trends.
-            ⁕ 100% Stacked Column for Tech Support impact analysis.
+2. Visualization (Power BI)
+⁕ DAX Measures: Calculated `Churn Rate %` and `Revenue at Risk`.
+⁕ Visuals: Created a "Contract Type" slicer to allow the marketing team to filter by customer commitment level.
 
 📂 File Structure
+👉 `churn_cleaning.py`: Python script for preprocessing raw data.
+👉 `snowflake_analysis.sql`: SQL scripts used for creating the database and running insights.
+👉 `Snowflake_Results.png`: Screenshot of the query results in the Snowflake interface.
+👉 `Churn_Dashboard.pbix`: The Power BI dashboard file.
+👉 `Telco_Churn.csv`: The dataset used.
 
-* `churn_cleaning.py`: Python script for preprocessing raw data.
-* `snowflake_analysis.sql`: SQL scripts used for creating the database and running insights.
-* `Snowflake_Results.png`: Screenshot of the query results in the Snowflake interface.
-* `Churn_Dashboard.pbix`: The Power BI dashboard file.
-* `Telco_Churn.csv`: The dataset used.
+🚀 How to Run
 
-🚀 How to Run This Project
-
-
-1.  Run `churn_cleaning.py` to prepare the data.
-2.  Load the data into Snowflake using the logic in `snowflake_analysis.sql`.
-3.  Open `Churn_Dashboard.pbix` to view the final report.
-
-Clone the repository:
-
-👉 git clone [https://github.com/priyanka-data-analyst/Telco-Customer-Churn-Analysis]
-
-✔️ Install dependencies:
-pip install pandas sqlalchemy pymysql
-
-✔️ Setup MySQL:
-⁕ Create a database named telco_churn.
-⁕ Update the password variable in upload_to_sql.py.
-
-✔️ Run the ETL script:
-python upload_to_sql.py
-
-✔️ Open Power BI:
-⁕ Open Telco_Dashboard.pbix.
-⁕ Edit Data Source settings to point to your local MySQL instance.
+1. Python: Run `churn_cleaning.py` to preprocess the data.
+2. Snowflake: Open Snowflake and create a new worksheet.
+   Copy/Paste the code from `snowflake_analysis.sql`.
+   Load the `Telco_Churn.csv` data using the Load Wizard.
+   Run the queries to generate insights.
+3. Power BI: Open `Churn_Dashboard.pbix` to view the final report.
 
 👤 Author
-Priyanka Deshpande Data Analyst | Python | SQL | Power BI 
-[Link to Portfolio/LinkedIn]
+Priyanka Deshpande 
+Data Analyst
