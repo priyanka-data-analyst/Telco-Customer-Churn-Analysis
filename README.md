@@ -74,11 +74,24 @@ Built a 6-point interactive dashboard featuring:
             ⁕ Area Chart for Tenure vs. Churn trends.
             ⁕ 100% Stacked Column for Tech Support impact analysis.
 
+📂 File Structure
+
+* `churn_cleaning.py`: Python script for preprocessing raw data.
+* `snowflake_analysis.sql`: SQL scripts used for creating the database and running insights.
+* `Snowflake_Results.png`: Screenshot of the query results in the Snowflake interface.
+* `Churn_Dashboard.pbix`: The Power BI dashboard file.
+* `Telco_Churn.csv`: The dataset used.
+
 🚀 How to Run This Project
+
+
+1.  Run `churn_cleaning.py` to prepare the data.
+2.  Load the data into Snowflake using the logic in `snowflake_analysis.sql`.
+3.  Open `Churn_Dashboard.pbix` to view the final report.
 
 Clone the repository:
 
-👉 git clone (https://github.com/priyanka-data-analyst/Telco-Customer-Churn-Analysis)]
+👉 git clone [https://github.com/priyanka-data-analyst/Telco-Customer-Churn-Analysis]
 
 ✔️ Install dependencies:
 pip install pandas sqlalchemy pymysql
@@ -96,27 +109,4 @@ python upload_to_sql.py
 
 👤 Author
 Priyanka Deshpande Data Analyst | Python | SQL | Power BI 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[Link to Portfolio/LinkedIn]
